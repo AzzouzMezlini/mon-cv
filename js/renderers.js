@@ -20,6 +20,7 @@ export function renderHeader() {
             <span class="contact-item">${state.cvData.coordonnees.permis}</span>
             <a class="contact-item" href="https://${state.cvData.coordonnees.linkedin}" target="_blank">LinkedIn</a>
             <a class="contact-item" href="https://${state.cvData.coordonnees.github}" target="_blank">GitHub</a>
+            <a class="contact-item" href="${state.cvData.coordonnees.cvcomplet}" target="_blank">CV Complet</a>
         `;
     }
 }

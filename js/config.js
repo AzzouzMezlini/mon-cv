@@ -1,6 +1,6 @@
 // Structure par défaut pour éviter tout crash si un champ manque dans le JSON
 export const DEFAULT_CV_DATA = {
-    coordonnees: { nom: "Candidat", statut: "", adresse: "", email: "", permis: "", linkedin: "", github: "" },
+    coordonnees: { nom: "Candidat", statut: "", adresse: "", email: "", permis: "", linkedin: "", github: "" , cvcomplet:""},
     profil: "",
     competences: [],
     experiences: [],
