@@ -97,6 +97,20 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* S'assurer que le conteneur de la page ne bloque pas le sticky sous Firefox */
+.page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0.75rem auto;
+    padding: 10mm 12mm;
+    background-color: var(--page-bg);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 0.5rem 1.5rem var(--shadow-color);
+    overflow: visible !important; /* Important pour que position: sticky fonctionne bien */
+}
+
 /* Mode ultra-compact forcé pour le format A4 */
 .page.compact-view {
     padding: 6mm 8mm !important;
@@ -851,5 +865,61 @@ body {
         margin-top: 1rem !important;
         padding-top: 0.25rem !important;
         border-top: 1px solid #e2e8f0 !important;
+    }
+}
+/* ==========================================================================
+   14. DESIGN RESPONSIVE (Tablettes & Smartphones)
+   ========================================================================== */
+@media screen and (max-width: 900px) {
+    /* La page prend toute la largeur disponible sur mobile avec des marges douces */
+    .page {
+        width: 100% !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 5mm 5mm !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    /* La barre de contrôle s'empile proprement sur mobile */
+    .controls-bar {
+        max-width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .controls-group, .controls-actions {
+        justify-content: space-between;
+    }
+
+    /* TRANSFORMATION DE LA GRILLE EN COLONNE UNIQUE */
+    .layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+
+    /* Désactivation du sticky sur mobile pour ne pas bloquer l'écran */
+    #sec-skills-top {
+        position: static !important;
+        box-shadow: none !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Réorganisation de l'ordre d'affichage sur mobile si besoin via Flexbox order */
+    .col-main {
+        order: 1;
+    }
+
+    .col-side {
+        order: 2;
+    }
+
+    /* Agrandissement léger des textes pour le confort tactile/mobile */
+    body {
+        font-size: 9.5pt;
     }
 }
