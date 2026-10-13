@@ -40,9 +40,9 @@ export function renderHeader() {
 
             <!-- Liens cliquables affichés sur l'export PDF -->
             <div class="print-text-links-wrapper">
+                <a class="contact-item print-text-link" href="${cvCompletUrl}" target="_blank">Version Web Interactive ↗</a>
                 <a class="contact-item print-text-link" href="${linkedinUrl}" target="_blank">LinkedIn</a>
                 <a class="contact-item print-text-link" href="${githubUrl}" target="_blank">GitHub</a>
-                <a class="contact-item print-text-link" href="${cvCompletUrl}" target="_blank">Version Web Interactive ↗</a>
                 <a class="contact-item print-text-link" href="${kaggleUrl}" target="_blank">Kaggle</a>
             </div>
 
