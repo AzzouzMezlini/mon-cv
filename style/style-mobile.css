@@ -1,0 +1,52 @@
+/* ==========================================================================
+   DESIGN RESPONSIVE (Écrans < 900px)
+   ========================================================================== */
+@media screen and (max-width: 900px) {
+    .page {
+        width: 100% !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 5mm 5mm !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    .controls-bar {
+        max-width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .controls-group,
+    .controls-actions {
+        justify-content: space-between;
+    }
+
+    /* Grille bascule en colonne unique */
+    .layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+
+    /* Désactivation du sticky sur mobile */
+    #sec-skills-top {
+        position: static !important;
+        box-shadow: none !important;
+        margin-bottom: 0 !important;
+    }
+
+    .col-main {
+        order: 1;
+    }
+    .col-side {
+        order: 2;
+    }
+
+    body {
+        font-size: 9.5pt;
+    }
+}

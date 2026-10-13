@@ -1,0 +1,241 @@
+/* ==========================================================================
+   MEDIA PRINT (Export PDF / Format A4 strict)
+   ========================================================================== */
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
+
+@media print {
+    :root,
+    [data-theme="dark"] {
+        --bg-color: #ffffff !important;
+        --page-bg: #ffffff !important;
+        --card-bg: #ffffff !important;
+        --profile-bg: #f8fafc !important;
+        --sticky-bg: #ffffff !important;
+        --text-primary: #2d3748 !important;
+        --text-secondary: #4a5568 !important;
+        --text-muted: #718096 !important;
+        --text-light: #a0aec0 !important;
+        --text-heading: #0d1117 !important;
+        --border-color: #e2e8f0 !important;
+        --border-subtle: #edf2f7 !important;
+        --accent-color: #b8923a !important;
+        --shadow-color: transparent !important;
+    }
+
+    html,
+    body {
+        background: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 210mm;
+        height: 297mm;
+        color: #000000 !important;
+    }
+
+    .hide-on-print {
+        display: none !important;
+    }
+
+    .exp-card,
+    .project-card,
+    .edu-block {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        box-shadow: none !important;
+        transform: none !important;
+    }
+
+    .controls-bar {
+        display: none !important;
+    }
+    #sec-skills-top {
+        display: none !important;
+    }
+    #sec-skills-side {
+        display: block !important;
+    }
+
+    .page {
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        padding: 8mm 10mm !important;
+        display: block !important;
+        position: relative !important;
+        background: #ffffff !important;
+    }
+
+    .header {
+        margin-bottom: 0.35rem !important;
+        padding-bottom: 0.35rem !important;
+    }
+    .header-main h1 {
+        font-size: 18pt !important;
+    }
+    .profile-card {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 8pt !important;
+        margin-bottom: 0.5rem !important;
+    }
+    .section-title {
+        font-size: 8.5pt !important;
+        margin-bottom: 0.35rem !important;
+        padding-bottom: 0.15rem !important;
+    }
+
+    .layout {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0.75rem !important;
+    }
+    .col-main {
+        flex: 1.8 !important;
+    }
+    .col-side {
+        flex: 1.2 !important;
+    }
+
+    .contact-grid {
+        flex-direction: column;
+        gap: 0.2rem !important;
+    }
+
+    .contact-row-top {
+        display: flex !important;
+        gap: 1rem !important;
+        font-size: 8pt !important;
+    }
+
+    .contact-row-bottom {
+        display: flex !important;
+        gap: 1rem !important;
+        font-size: 7pt !important;
+    }
+
+    /* Afficher les liens textuels cliquables pour le PDF */
+    .print-text-links-wrapper {
+        display: flex !important;
+        gap: 1rem;
+        margin-top: 0.2rem;
+    }
+
+    /* Gestion des QR codes en haut à droite */
+    .print-qrcodes-wrapper {
+        display: flex !important;
+        gap: 6px;
+        position: absolute;
+        top: 6mm;
+        right: 10mm;
+    }
+
+    .print-qrcode-container {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        padding: 3px;
+        border: 1px solid #cbd5e1;
+        border-radius: 3px;
+    }
+
+    .print-qrcode-img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .print-qrcode-text {
+        font-size: 4.5pt;
+        color: #475569;
+        margin-top: 1px;
+        font-family: sans-serif;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    /* Afficher et styliser les liens cliquables sur le PDF */
+    .print-text-link {
+        color: var(--accent-color) !important;
+        text-decoration: underline !important;
+        font-weight: 700 !important;
+        font-size: 7.5pt !important;
+    }
+
+    .project-link {
+        color: #000000 !important;
+        text-decoration: underline !important;
+    }
+
+    /* Gestion des QR codes en haut à droite */
+    .print-qrcodes-wrapper {
+        display: flex !important;
+        gap: 6px;
+        position: absolute;
+        top: 6mm;
+        right: 10mm;
+    }
+
+    .print-qrcode-container {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        padding: 3px;
+        border: 1px solid #cbd5e1;
+        border-radius: 3px;
+    }
+
+    .print-qrcode-img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .print-qrcode-text {
+        font-size: 4.5pt;
+        color: #475569;
+        margin-top: 1px;
+        font-family: sans-serif;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .exp-container {
+        gap: 0.4rem !important;
+    }
+    .exp-card {
+        margin-bottom: 0.2rem !important;
+    }
+    .exp-role {
+        font-size: 9pt !important;
+    }
+    .exp-list {
+        font-size: 7.5pt !important;
+        line-height: 1.2 !important;
+        padding-left: 0.8rem !important;
+    }
+    .project-card {
+        padding: 0.25rem 0.4rem !important;
+        margin-bottom: 0.25rem !important;
+    }
+    .project-title {
+        font-size: 7.5pt !important;
+    }
+    .project-desc {
+        font-size: 7pt !important;
+    }
+    .skill-tag {
+        font-size: 7pt !important;
+        padding: 1px 5px !important;
+    }
+    .footer {
+        display: flex !important;
+        position: static !important;
+        margin-top: 1rem !important;
+    }
+}

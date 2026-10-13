@@ -1,0 +1,600 @@
+/* ==========================================================================
+   1. VARIABLES & THÈMES (Clair / Sombre)
+   ========================================================================== */
+:root {
+    --bg-color: #f0f2f5;
+    --page-bg: #ffffff;
+    --card-bg: #ffffff;
+    --profile-bg: #f8fafc;
+    --sticky-bg: #ffffff;
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --text-light: #a0aec0;
+    --text-heading: #0d1117;
+    --border-color: #e2e8f0;
+    --border-subtle: #edf2f7;
+    --accent-color: #b8923a;
+    --accent-hover: #9d7a2b;
+    --accent-light: #fffaf0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-sticky: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+    --bg-color: #0d1117;
+    --page-bg: #161b22;
+    --card-bg: #1e2530;
+    --profile-bg: #21262d;
+    --sticky-bg: #161b22;
+    --text-primary: #e6edf3;
+    --text-secondary: #c9d1d9;
+    --text-muted: #8b949e;
+    --text-light: #6e7681;
+    --text-heading: #ffffff;
+    --border-color: #30363d;
+    --border-subtle: #21262d;
+    --accent-color: #d4af37;
+    --accent-hover: #b8923a;
+    --accent-light: #282115;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --shadow-sticky: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .theme-icon-light,
+[data-theme="dark"] .theme-text-light {
+    display: none;
+}
+[data-theme="dark"] .theme-icon-dark,
+[data-theme="dark"] .theme-text-dark {
+    display: inline;
+}
+
+/* ==========================================================================
+   2. RESET & BASE
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    font-family:
+        "Segoe UI",
+        -apple-system,
+        BlinkMacSystemFont,
+        Roboto,
+        sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Éviter le FOUC lors du changement de thème */
+body.theme-transition,
+body.theme-transition *,
+body.theme-transition *::before,
+body.theme-transition *::after {
+    transition:
+        background-color 0.35s ease,
+        color 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease !important;
+}
+
+
+/* Masqué par défaut sur écran */
+.print-qrcode-container {
+    display: none;
+}
+
+.print-text-link {
+    display: none;
+}
+
+/* Masqué par défaut sur écran */
+.print-text-links-wrapper {
+    display: none;
+}
+
+
+/* ==========================================================================
+   3. CONTENEUR PAGE & COMPACT
+   ========================================================================== */
+.page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0.75rem auto;
+    padding: 10mm 12mm;
+    background-color: var(--page-bg);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 0.5rem 1.5rem var(--shadow-color);
+    overflow: visible !important;
+}
+
+.page.compact-view {
+    padding: 6mm 8mm !important;
+}
+.page.compact-view .exp-list {
+    font-size: 7.5pt !important;
+    line-height: 1.15 !important;
+}
+.page.compact-view .exp-card {
+    margin-bottom: 2px !important;
+}
+.page.compact-view .profile-card,
+.page.compact-view .section-title {
+    margin-bottom: 0.25rem !important;
+}
+
+/* ==========================================================================
+   4. BARRE DE CONTRÔLE (Haut de page)
+   ========================================================================== */
+.controls-bar {
+    max-width: 210mm;
+    margin: 0.75rem auto 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    background: #1a202c;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    color: #f7fafc;
+    font-size: 8.5pt;
+}
+.controls-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.controls-label {
+    font-weight: 700;
+    color: #e2e8f0;
+    white-space: nowrap;
+}
+.controls-options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.radio-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0 !important;
+    white-space: nowrap;
+}
+.radio-option input[type="radio"] {
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--accent-color);
+}
+.controls-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+.btn-print {
+    background: var(--accent-color);
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.85rem;
+    border-radius: 0.375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.btn-print:hover {
+    background: var(--accent-hover);
+}
+
+/* Switch Toggle Thème */
+.theme-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-size: 8.5pt;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+.theme-switch-label {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+.theme-icon-dark {
+    display: none;
+}
+.switch-wrapper {
+    position: relative;
+    width: 38px;
+    height: 20px;
+    flex-shrink: 0;
+}
+.switch-wrapper input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.switch-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #4a5568;
+    border-radius: 20px;
+    transition: background-color 0.25s ease;
+}
+.switch-slider::before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.25s ease;
+}
+.switch-wrapper input:checked + .switch-slider {
+    background-color: var(--accent-color);
+}
+.switch-wrapper input:checked + .switch-slider::before {
+    transform: translateX(18px);
+}
+
+/* ==========================================================================
+   5. HEADER & PROFIL
+   ========================================================================== */
+.header {
+    background: transparent;
+    padding: 0 0 0.75rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 0.5rem;
+}
+.header-main h1 {
+    margin: 0;
+    font-size: 22pt;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: var(--text-heading);
+    text-transform: uppercase;
+}
+.header-main .title-badge {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* Conteneur global des coordonnées */
+.contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+}
+
+/* Chaque ligne de contact en Flexbox */
+.contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+/* Ligne du haut : mise en valeur de l'e-mail et des liens interactifs */
+.contact-row-top {
+    font-size: 8.5pt;
+}
+
+/* Ligne du bas : informations administratives plus discrètes */
+.contact-row-bottom {
+    font-size: 7.5pt;
+    color: var(--text-muted);
+}
+
+/* Style de l'e-mail (traité comme un élément clé interactif visuellement) */
+.contact-email {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.contact-item {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 8pt;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    text-decoration: none;
+}
+.contact-item svg {
+    width: 0.9em;
+    height: 0.9em;
+    fill: var(--accent-color);
+    flex-shrink: 0;
+}
+.contact-item strong {
+    color: var(--text-primary);
+}
+
+/* Style des liens interactifs (LinkedIn, GitHub, etc.) */
+.contact-link {
+    color: var(--accent-color) !important;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s ease, text-decoration 0.2s ease;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+    opacity: 0.85;
+}
+
+/* Style de l'e-mail (texte brut non cliquable pour éviter l'ouverture du client mail) */
+.contact-email {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.profile-card {
+    background: var(--profile-bg);
+    border-left: 3px solid var(--accent-color);
+    padding: 0.6rem 0.85rem;
+    border-radius: 0 0.25rem 0.25rem 0;
+    font-size: 8.5pt;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   6. LAYOUT PRINCIPAL & TITRES
+   ========================================================================== */
+.layout {
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr;
+    grid-template-areas: "skills skills" "main side";
+    gap: 1.25rem;
+    flex: 1;
+    min-height: 0;
+}
+.col-main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+}
+.col-side {
+    grid-area: side;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.section-title {
+    font-size: 9pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1.5px solid var(--border-color);
+}
+#sec-skills-side {
+    display: none;
+}
+
+/* ==========================================================================
+   7. COMPÉTENCES (STICKY TOP) & INTERACTIVITÉ
+   ========================================================================== */
+#sec-skills-top {
+    grid-area: skills;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--sticky-bg);
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 12px var(--shadow-sticky);
+    margin-bottom: 0.5rem;
+}
+.skill-group-title {
+    font-size: 7.5pt;
+    font-weight: 700;
+    color: var(--text-light);
+    margin: 0.35rem 0 0.2rem 0;
+    text-transform: uppercase;
+}
+.skill-tag-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+.skill-tag {
+    font-size: 7.5pt;
+    background: var(--profile-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 2px 7px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.skill-tag:hover {
+    transform: scale(1.08);
+}
+.skill-tag.featured {
+    background: #fefcbf;
+    color: #744210;
+    border-color: #ecc94b;
+    font-weight: 600;
+}
+[data-theme="dark"] .skill-tag.featured {
+    background: #4a3712;
+    color: #fefcbf;
+    border-color: #b7791f;
+}
+
+.skill-tag.highlighted {
+    background-color: var(--accent-color) !important;
+    color: #fff !important;
+    border-color: var(--accent-color) !important;
+    font-weight: 700;
+}
+.skill-tag.active-filter {
+    background-color: var(--text-primary) !important;
+    color: var(--page-bg) !important;
+    font-weight: 700;
+}
+.dimmed {
+    opacity: 0.35 !important;
+    filter: grayscale(80%);
+}
+
+/* ==========================================================================
+   8. EXPÉRIENCES, PROJETS & FORMATIONS
+   ========================================================================== */
+.exp-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.exp-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    flex: 1;
+}
+.exp-card {
+    transition: transform 0.15s ease;
+}
+.exp-card:hover {
+    transform: translateY(-2px);
+}
+.exp-role {
+    font-size: 10pt;
+    font-weight: 800;
+    color: var(--text-heading);
+}
+.exp-company {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+.exp-date {
+    font-size: 7.5pt;
+    font-weight: 600;
+    color: var(--text-light);
+}
+.exp-list {
+    margin: 0.25rem 0 0 0;
+    padding-left: 1rem;
+    font-size: 8pt;
+    color: var(--text-secondary);
+    line-height: 1.35;
+}
+.exp-list li::marker {
+    color: var(--accent-color);
+}
+
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.25rem;
+    padding: 0.35rem 0.5rem;
+    margin-bottom: 0.35rem;
+    transition: transform 0.15s ease;
+}
+.project-card:hover {
+    transform: translateY(-2px);
+}
+.project-title {
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--text-heading);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.project-link {
+    color: var(--text-heading);
+    text-decoration: none;
+}
+.project-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+.project-badge {
+    font-size: 6.5pt;
+    background: #feebc8;
+    color: #744210;
+    padding: 0.1em 0.4em;
+    border-radius: 0.125rem;
+    font-weight: 700;
+}
+[data-theme="dark"] .project-badge {
+    background: #4a3712;
+    color: #feebc8;
+}
+.project-desc {
+    font-size: 7.5pt;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+}
+
+.edu-block {
+    margin-bottom: 0.5rem;
+}
+.edu-title {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: var(--text-heading);
+}
+.edu-sub {
+    font-size: 7.5pt;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.1rem;
+}
+.edu-company {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+.edu-year {
+    font-size: 7.5pt;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.footer {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: space-between;
+    font-size: 7pt;
+    color: var(--text-light);
+}
