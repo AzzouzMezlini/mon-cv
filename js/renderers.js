@@ -16,56 +16,39 @@ export function renderHeader() {
     if (contactList) {
         const cvCompletUrl = `https://${state.cvData.coordonnees.cvcomplet}`;
         const linkedinUrl = `https://${state.cvData.coordonnees.linkedin}`;
-      const githubUrl = `https://${state.cvData.coordonnees.github}`;
-      const kaggleUrl = `https://${state.cvData.coordonnees.kaggle}`;
+        const githubUrl = `https://${state.cvData.coordonnees.github}`;
 
-        const qrCvUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(cvCompletUrl)}`;
-        const qrLinkedinUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(linkedinUrl)}`;
-      const qrGithubUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(githubUrl)}`;
-      const qrKaggleUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(kaggleUrl)}`;
-
+        // QR Code unique pointant vers la version web interactive
+        const qrCvUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(cvCompletUrl)}`;
 
         contactList.innerHTML = `
-            <!-- Ligne du haut : E-mail & Liens interactifs -->
+            <!-- Ligne 1 : E-mail & Liens professionnels -->
             <div class="contact-row contact-row-top">
                 <span class="contact-item contact-email">📧 ${state.cvData.coordonnees.email}</span>
                 <a class="contact-item contact-link hide-on-print" href="${linkedinUrl}" target="_blank">LinkedIn ↗</a>
                 <a class="contact-item contact-link hide-on-print" href="${githubUrl}" target="_blank">GitHub ↗</a>
-                <a class="contact-item contact-link hide-on-print" href="${kaggleUrl}" target="_blank">Kaggle ↗</a>
+                <!-- Emplacement Kaggle futur -->
+                <!-- <a class="contact-item contact-link hide-on-print" href="..." target="_blank">Kaggle ↗</a> -->
             </div>
 
-            <!-- Ligne du bas : Données administratives (Adresse & Permis) -->
+            <!-- Ligne 2 : Données administratives -->
             <div class="contact-row contact-row-bottom">
                 <span class="contact-item">${state.cvData.coordonnees.adresse}</span>
                 <span class="contact-item">${state.cvData.coordonnees.permis}</span>
             </div>
 
-            <!-- Liens textuels affichés uniquement pour le PDF -->
+            <!-- Liens cliquables affichés sur l'export PDF -->
             <div class="print-text-links-wrapper">
                 <a class="contact-item print-text-link" href="${linkedinUrl}" target="_blank">LinkedIn</a>
                 <a class="contact-item print-text-link" href="${githubUrl}" target="_blank">GitHub</a>
-                <a class="contact-item print-text-link" href="${kaggleUrl}" target="_blank">Kaggle</a>
-                <a class="contact-item print-text-link" href="${cvCompletUrl}" target="_blank">CV Complet</a>
+                <a class="contact-item print-text-link" href="${cvCompletUrl}" target="_blank">Version Web Interactive ↗</a>
             </div>
 
-            <!-- QR Codes pour l'impression papier -->
-            <div class="print-qrcodes-wrapper">
-                <div class="print-qrcode-container">
-                    <img src="${qrLinkedinUrl}" alt="QR Code LinkedIn" class="print-qrcode-img">
-                    <span class="print-qrcode-text">LinkedIn</span>
-                </div>
-                <div class="print-qrcode-container">
-                    <img src="${qrGithubUrl}" alt="QR Code GitHub" class="print-qrcode-img">
-                    <span class="print-qrcode-text">GitHub</span>
-                </div>
-                <div class="print-qrcode-container">
-                    <img src="${qrKaggleUrl}" alt="QR Code Kaggle" class="print-qrcode-img">
-                    <span class="print-qrcode-text">Kaggle</span>
-                </div>
-                <div class="print-qrcode-container">
-                    <img src="${qrCvUrl}" alt="QR Code CV Complet" class="print-qrcode-img">
-                    <span class="print-qrcode-text">CV Complet</span>
-                </div>
+            <!-- QR Code UNIQUE pour le scan (Papier / Impression) -->
+            <div class="print-qrcode-container">
+                <img src="${qrCvUrl}" alt="QR Code CV Web" class="print-qrcode-img">
+                <span class="print-qrcode-title">CV INTERACTIF</span>
+                <span class="print-qrcode-text">Scanner pour la version en ligne</span>
             </div>
         `;
     }

@@ -86,21 +86,12 @@ body.theme-transition *::after {
         box-shadow 0.35s ease !important;
 }
 
-
-/* Masqué par défaut sur écran */
-.print-qrcode-container {
-    display: none;
-}
-
-.print-text-link {
-    display: none;
-}
-
-/* Masqué par défaut sur écran */
+/* Éléments réservés à l'impression/PDF : masqués sur l'écran web */
+.print-qrcode-container,
+.print-text-link,
 .print-text-links-wrapper {
     display: none;
 }
-
 
 /* ==========================================================================
    3. CONTENEUR PAGE & COMPACT
@@ -299,18 +290,18 @@ body.theme-transition *::after {
     align-items: center;
 }
 
-/* Ligne du haut : mise en valeur de l'e-mail et des liens interactifs */
+/* Ligne 1 : e-mail et liens interactifs */
 .contact-row-top {
     font-size: 8.5pt;
 }
 
-/* Ligne du bas : informations administratives plus discrètes */
+/* Ligne 2 : informations administratives */
 .contact-row-bottom {
     font-size: 7.5pt;
     color: var(--text-muted);
 }
 
-/* Style de l'e-mail (traité comme un élément clé interactif visuellement) */
+/* Style de l'e-mail (mis en valeur, texte brut non cliquable) */
 .contact-email {
     color: var(--accent-color);
     font-weight: 700;
@@ -348,12 +339,6 @@ body.theme-transition *::after {
 .contact-link:hover {
     text-decoration: underline;
     opacity: 0.85;
-}
-
-/* Style de l'e-mail (texte brut non cliquable pour éviter l'ouverture du client mail) */
-.contact-email {
-    color: var(--text-primary);
-    font-weight: 500;
 }
 
 .profile-card {

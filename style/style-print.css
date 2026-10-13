@@ -120,8 +120,8 @@
     /* Afficher les liens textuels cliquables pour le PDF */
     .print-text-links-wrapper {
         display: flex !important;
-        gap: 1rem;
-        margin-top: 0.2rem;
+        gap: 1.2rem;
+        margin-top: 0.3rem;
     }
 
     /* Gestion des QR codes en haut à droite */
@@ -133,37 +133,12 @@
         right: 10mm;
     }
 
-    .print-qrcode-container {
-        display: flex !important;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: #ffffff;
-        padding: 3px;
-        border: 1px solid #cbd5e1;
-        border-radius: 3px;
-    }
-
-    .print-qrcode-img {
-        width: 44px;
-        height: 44px;
-    }
-
-    .print-qrcode-text {
-        font-size: 4.5pt;
-        color: #475569;
-        margin-top: 1px;
-        font-family: sans-serif;
-        text-align: center;
-        font-weight: 600;
-    }
-
     /* Afficher et styliser les liens cliquables sur le PDF */
     .print-text-link {
         color: var(--accent-color) !important;
         text-decoration: underline !important;
         font-weight: 700 !important;
-        font-size: 7.5pt !important;
+        font-size: 8pt !important;
     }
 
     .project-link {
@@ -180,24 +155,38 @@
         right: 10mm;
     }
 
+    /* Conteneur du QR Code unique (En haut à droite) */
     .print-qrcode-container {
         display: flex !important;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        position: absolute;
+        top: 6mm;
+        right: 10mm;
         background: #ffffff;
-        padding: 3px;
-        border: 1px solid #cbd5e1;
-        border-radius: 3px;
+        padding: 4px 6px;
+        border: 1.5px solid var(--accent-color);
+        border-radius: 4px;
+        text-align: center;
     }
 
     .print-qrcode-img {
-        width: 44px;
-        height: 44px;
+        width: 52px;
+        height: 52px;
+    }
+
+    .print-qrcode-title {
+        font-size: 5.5pt;
+        font-weight: 800;
+        color: var(--accent-color);
+        margin-top: 2px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
     }
 
     .print-qrcode-text {
-        font-size: 4.5pt;
+        font-size: 5pt;
         color: #475569;
         margin-top: 1px;
         font-family: sans-serif;
