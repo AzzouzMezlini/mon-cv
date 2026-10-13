@@ -14,13 +14,38 @@ export function renderHeader() {
 
     const contactList = document.getElementById('contact-list');
     if (contactList) {
+        const cvCompletUrl = `https://${state.cvData.coordonnees.cvcomplet}`;
+        const linkedinUrl = `https://${state.cvData.coordonnees.linkedin}`;
+        const githubUrl = `https://${state.cvData.coordonnees.github}`;
+
+        // URLs des API pour générer les QR codes à la volée
+        const qrCvUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(cvCompletUrl)}`;
+        const qrLinkedinUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(linkedinUrl)}`;
+        const qrGithubUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(githubUrl)}`;
+
         contactList.innerHTML = `
             <span class="contact-item">${state.cvData.coordonnees.adresse}</span>
             <span class="contact-item">${state.cvData.coordonnees.email}</span>
             <span class="contact-item">${state.cvData.coordonnees.permis}</span>
-            <a class="contact-item" href="https://${state.cvData.coordonnees.linkedin}" target="_blank">LinkedIn</a>
-            <a class="contact-item" href="https://${state.cvData.coordonnees.github}" target="_blank">GitHub</a>
-            <a class="contact-item" href="https://${state.cvData.coordonnees.cvcomplet}" target="_blank">CV Complet</a>
+            <a class="contact-item hide-on-print" href="${linkedinUrl}" target="_blank">LinkedIn</a>
+            <a class="contact-item hide-on-print" href="${githubUrl}" target="_blank">GitHub</a>
+            <a class="contact-item hide-on-print" href="${cvCompletUrl}" target="_blank">CV Complet</a>
+
+            <!-- Conteneurs des QR Codes pour l'impression -->
+            <div class="print-qrcodes-wrapper">
+                <div class="print-qrcode-container">
+                    <img src="${qrLinkedinUrl}" alt="QR Code LinkedIn" class="print-qrcode-img">
+                    <span class="print-qrcode-text">LinkedIn</span>
+                </div>
+                <div class="print-qrcode-container">
+                    <img src="${qrGithubUrl}" alt="QR Code GitHub" class="print-qrcode-img">
+                    <span class="print-qrcode-text">GitHub</span>
+                </div>
+                <div class="print-qrcode-container">
+                    <img src="${qrCvUrl}" alt="QR Code CV Complet" class="print-qrcode-img">
+                    <span class="print-qrcode-text">CV Complet</span>
+                </div>
+            </div>
         `;
     }
 }
