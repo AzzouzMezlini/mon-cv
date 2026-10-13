@@ -1,34 +1,35 @@
-import { state } from './app.js';
+import { state } from "./app.js";
 import {
-    toggleSkillFilter,
-    handleExperienceHover,
-    handleProjectHover,
-    handleEducationHover,
-    updateVisualHighlighting
-} from './interactivity.js';
+  toggleSkillFilter,
+  handleExperienceHover,
+  handleProjectHover,
+  handleEducationHover,
+  updateVisualHighlighting,
+} from "./interactivity.js";
 
 export function renderHeader() {
-    if (!state.cvData) return;
-    document.getElementById('user-name').textContent = state.cvData.coordonnees.nom;
-    document.getElementById('user-title').textContent = state.cvData.statut;
+  if (!state.cvData) return;
+  document.getElementById("user-name").textContent =
+    state.cvData.coordonnees.nom;
+  document.getElementById("user-title").textContent = state.cvData.statut;
 
-    const contactList = document.getElementById('contact-list');
-    if (contactList) {
-        const cvCompletUrl = `https://${state.cvData.coordonnees.cvcomplet}`;
-        const linkedinUrl = `https://${state.cvData.coordonnees.linkedin}`;
-        const githubUrl = `https://${state.cvData.coordonnees.github}`;
+  const contactList = document.getElementById("contact-list");
+  if (contactList) {
+    const cvCompletUrl = `https://${state.cvData.coordonnees.cvcomplet}`;
+    const linkedinUrl = `https://${state.cvData.coordonnees.linkedin}`;
+    const githubUrl = `https://${state.cvData.coordonnees.github}`;
+    const kaggleUrl = `https://${state.cvData.coordonnees.kaggle}`;
 
-        // QR Code unique pointant vers la version web interactive
-        const qrCvUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(cvCompletUrl)}`;
+    // QR Code unique pointant vers la version web interactive
+    const qrCvUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(cvCompletUrl)}`;
 
-        contactList.innerHTML = `
+    contactList.innerHTML = `
             <!-- Ligne 1 : E-mail & Liens professionnels -->
             <div class="contact-row contact-row-top">
                 <span class="contact-item contact-email">📧 ${state.cvData.coordonnees.email}</span>
                 <a class="contact-item contact-link hide-on-print" href="${linkedinUrl}" target="_blank">LinkedIn ↗</a>
                 <a class="contact-item contact-link hide-on-print" href="${githubUrl}" target="_blank">GitHub ↗</a>
-                <!-- Emplacement Kaggle futur -->
-                <!-- <a class="contact-item contact-link hide-on-print" href="..." target="_blank">Kaggle ↗</a> -->
+                <a class="contact-item contact-link hide-on-print" href="${kaggleUrl}" target="_blank">kaggle ↗</a>
             </div>
 
             <!-- Ligne 2 : Données administratives -->
@@ -42,6 +43,7 @@ export function renderHeader() {
                 <a class="contact-item print-text-link" href="${linkedinUrl}" target="_blank">LinkedIn</a>
                 <a class="contact-item print-text-link" href="${githubUrl}" target="_blank">GitHub</a>
                 <a class="contact-item print-text-link" href="${cvCompletUrl}" target="_blank">Version Web Interactive ↗</a>
+                <a class="contact-item print-text-link" href="${kaggleUrl}" target="_blank">Kaggle</a>
             </div>
 
             <!-- QR Code UNIQUE pour le scan (Papier / Impression) -->
@@ -51,86 +53,91 @@ export function renderHeader() {
                 <span class="print-qrcode-text">Scanner pour la version en ligne</span>
             </div>
         `;
-    }
+  }
 }
 
 export function renderProfile() {
-    const profileContainer = document.getElementById('profile-text');
-    if (profileContainer && state.cvData) {
-        profileContainer.textContent = state.cvData.profil;
-    }
+  const profileContainer = document.getElementById("profile-text");
+  if (profileContainer && state.cvData) {
+    profileContainer.textContent = state.cvData.profil;
+  }
 }
 
 export function renderSkills() {
-    if (!state.cvData) return;
+  if (!state.cvData) return;
 
-    const containers = [
-        document.getElementById('skills-container-top'),
-        document.getElementById('skills-container-side')
-    ];
+  const containers = [
+    document.getElementById("skills-container-top"),
+    document.getElementById("skills-container-side"),
+  ];
 
-    containers.forEach(container => {
-        if (!container) return;
-        container.innerHTML = '';
+  containers.forEach((container) => {
+    if (!container) return;
+    container.innerHTML = "";
 
-        state.cvData.competences.forEach(cat => {
-            const groupTitle = document.createElement('div');
-            groupTitle.className = 'skill-group-title';
-            groupTitle.textContent = cat.categorie;
-            container.appendChild(groupTitle);
+    state.cvData.competences.forEach((cat) => {
+      const groupTitle = document.createElement("div");
+      groupTitle.className = "skill-group-title";
+      groupTitle.textContent = cat.categorie;
+      container.appendChild(groupTitle);
 
-            const tagGroup = document.createElement('div');
-            tagGroup.className = 'skill-tag-group';
+      const tagGroup = document.createElement("div");
+      tagGroup.className = "skill-tag-group";
 
-            cat.liste.forEach(item => {
-                const tag = document.createElement('span');
-                tag.className = 'skill-tag';
-                tag.dataset.skill = item.nom;
-                tag.dataset.defaultFeatured = item.featured ? "true" : "false";
-                tag.textContent = item.nom;
+      cat.liste.forEach((item) => {
+        const tag = document.createElement("span");
+        tag.className = "skill-tag";
+        tag.dataset.skill = item.nom;
+        tag.dataset.defaultFeatured = item.featured ? "true" : "false";
+        tag.textContent = item.nom;
 
-                tag.addEventListener('click', () => toggleSkillFilter(item.nom));
-                tagGroup.appendChild(tag);
-            });
+        tag.addEventListener("click", () => toggleSkillFilter(item.nom));
+        tagGroup.appendChild(tag);
+      });
 
-            container.appendChild(tagGroup);
-        });
+      container.appendChild(tagGroup);
     });
+  });
 
-    updateVisualHighlighting();
+  updateVisualHighlighting();
 }
 
 export function renderExperiences() {
-    const timelineContainer = document.getElementById('experience-container');
-    if (!timelineContainer || !state.cvData) return;
-    timelineContainer.innerHTML = '';
+  const timelineContainer = document.getElementById("experience-container");
+  if (!timelineContainer || !state.cvData) return;
+  timelineContainer.innerHTML = "";
 
-    const viewMode = document.querySelector('input[name="viewMode"]:checked')?.value || 'compact';
+  const viewMode =
+    document.querySelector('input[name="viewMode"]:checked')?.value ||
+    "compact";
 
-    const newUrl = new URL(window.location.href);
-    newUrl.searchParams.set('view', viewMode);
-    window.history.replaceState({}, '', newUrl);
+  const newUrl = new URL(window.location.href);
+  newUrl.searchParams.set("view", viewMode);
+  window.history.replaceState({}, "", newUrl);
 
-    const pageElement = document.querySelector('.page');
-    if (pageElement) {
-        pageElement.classList.toggle('compact-view', viewMode === 'compact');
-    }
+  const pageElement = document.querySelector(".page");
+  if (pageElement) {
+    pageElement.classList.toggle("compact-view", viewMode === "compact");
+  }
 
-    const experiencesToDisplay = (viewMode === 'compact')
-        ? state.cvData.experiences.slice(0, 7)
-        : state.cvData.experiences;
+  const experiencesToDisplay =
+    viewMode === "compact"
+      ? state.cvData.experiences.slice(0, 7)
+      : state.cvData.experiences;
 
-    experiencesToDisplay.forEach((exp) => {
-        const originalIndex = state.cvData.experiences.indexOf(exp);
+  experiencesToDisplay.forEach((exp) => {
+    const originalIndex = state.cvData.experiences.indexOf(exp);
 
-        const expDiv = document.createElement('div');
-        expDiv.className = 'exp-card';
-        expDiv.dataset.expIdx = originalIndex;
-        expDiv.dataset.defaultFeatured = exp.featured ? "true" : "false";
+    const expDiv = document.createElement("div");
+    expDiv.className = "exp-card";
+    expDiv.dataset.expIdx = originalIndex;
+    expDiv.dataset.defaultFeatured = exp.featured ? "true" : "false";
 
-        const companyLabel = exp.prestataire ? `${exp.entreprise} (via ${exp.prestataire})` : exp.entreprise;
+    const companyLabel = exp.prestataire
+      ? `${exp.entreprise} (via ${exp.prestataire})`
+      : exp.entreprise;
 
-        expDiv.innerHTML = `
+    expDiv.innerHTML = `
             <div class="exp-header">
                 <div>
                     <div class="exp-role">${exp.poste}</div>
@@ -140,41 +147,43 @@ export function renderExperiences() {
             </div>
         `;
 
-        const missionsList = document.createElement('ul');
-        missionsList.className = 'exp-list';
-        exp.missions.forEach((m, idx) => {
-            if (viewMode === 'compact' && idx >= 2) return;
-            const li = document.createElement('li');
-            li.textContent = m;
-            missionsList.appendChild(li);
-        });
-        expDiv.appendChild(missionsList);
-
-        expDiv.addEventListener('mouseenter', () => handleExperienceHover(originalIndex));
-        expDiv.addEventListener('mouseleave', () => handleExperienceHover(null));
-
-        timelineContainer.appendChild(expDiv);
+    const missionsList = document.createElement("ul");
+    missionsList.className = "exp-list";
+    exp.missions.forEach((m, idx) => {
+      if (viewMode === "compact" && idx >= 2) return;
+      const li = document.createElement("li");
+      li.textContent = m;
+      missionsList.appendChild(li);
     });
+    expDiv.appendChild(missionsList);
 
-    updateVisualHighlighting();
+    expDiv.addEventListener("mouseenter", () =>
+      handleExperienceHover(originalIndex),
+    );
+    expDiv.addEventListener("mouseleave", () => handleExperienceHover(null));
+
+    timelineContainer.appendChild(expDiv);
+  });
+
+  updateVisualHighlighting();
 }
 
 export function renderProjects() {
-    const projectsContainer = document.getElementById('projects-container');
-    if (!projectsContainer || !state.cvData) return;
-    projectsContainer.innerHTML = '';
+  const projectsContainer = document.getElementById("projects-container");
+  if (!projectsContainer || !state.cvData) return;
+  projectsContainer.innerHTML = "";
 
-    state.cvData.projets.forEach((proj, idx) => {
-        const card = document.createElement('div');
-        card.className = 'project-card';
-        card.dataset.projIdx = idx;
+  state.cvData.projets.forEach((proj, idx) => {
+    const card = document.createElement("div");
+    card.className = "project-card";
+    card.dataset.projIdx = idx;
 
-        // Si un lien est présent dans le JSON, on l'encapsule dans une balise <a>
-        const projectTitleContent = proj.liens
-            ? `<a href="${proj.liens}" target="_blank" class="project-link">${proj.titre}</a>`
-            : proj.titre;
+    // Si un lien est présent dans le JSON, on l'encapsule dans une balise <a>
+    const projectTitleContent = proj.liens
+      ? `<a href="${proj.liens}" target="_blank" class="project-link">${proj.titre}</a>`
+      : proj.titre;
 
-        card.innerHTML = `
+    card.innerHTML = `
             <div class="project-title">
                 <span>${projectTitleContent}</span>
                 <span class="project-badge ${proj.type_badge}">${proj.badge}</span>
@@ -182,24 +191,24 @@ export function renderProjects() {
             <div class="project-desc">${proj.desc}</div>
         `;
 
-        card.addEventListener('mouseenter', () => handleProjectHover(idx));
-        card.addEventListener('mouseleave', () => handleProjectHover(null));
+    card.addEventListener("mouseenter", () => handleProjectHover(idx));
+    card.addEventListener("mouseleave", () => handleProjectHover(null));
 
-        projectsContainer.appendChild(card);
-    });
+    projectsContainer.appendChild(card);
+  });
 }
 
 export function renderEducation() {
-    const eduContainer = document.getElementById('education-container');
-    if (!eduContainer || !state.cvData) return;
-    eduContainer.innerHTML = '';
+  const eduContainer = document.getElementById("education-container");
+  if (!eduContainer || !state.cvData) return;
+  eduContainer.innerHTML = "";
 
-    state.cvData.formations.forEach((f, idx) => {
-        const div = document.createElement('div');
-        div.className = 'edu-block';
-        div.dataset.eduIdx = idx;
+  state.cvData.formations.forEach((f, idx) => {
+    const div = document.createElement("div");
+    div.className = "edu-block";
+    div.dataset.eduIdx = idx;
 
-        div.innerHTML = `
+    div.innerHTML = `
             <div class="edu-title">${f.diplome}</div>
             <div class="edu-sub">
                 <span>${f.institution}</span>
@@ -207,9 +216,9 @@ export function renderEducation() {
             </div>
         `;
 
-        div.addEventListener('mouseenter', () => handleEducationHover(idx));
-        div.addEventListener('mouseleave', () => handleEducationHover(null));
+    div.addEventListener("mouseenter", () => handleEducationHover(idx));
+    div.addEventListener("mouseleave", () => handleEducationHover(null));
 
-        eduContainer.appendChild(div);
-    });
+    eduContainer.appendChild(div);
+  });
 }
