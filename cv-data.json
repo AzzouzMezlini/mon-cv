@@ -7,6 +7,7 @@
     "permis": "Permis B",
     "linkedin": "linkedin.com/in/azzouz-mezlini",
     "github": "github.com/AzzouzMezlini",
+    "kaggle": "kaggle.com/azzouzmezlini",
     "cvcomplet":"azzouzmezlini.github.io/mon-cv/?view=full"
   },
   "profil": "Data Engineer et Développeur SQL, spécialiste en SQL avancé, modélisation décisionnelle et automatisation ETL. Solide double compétence alliant expertise technique (dbt, Cube.dev, PostgreSQL, SQL Server, VBA Orienté Objet) et fine compréhension des enjeux métiers (Gérance, Achats, Contrôle de gestion).",
@@ -323,6 +324,7 @@
       "badge": "GitHub",
       "type_badge": "github",
       "desc": "Modélisation décisionnelle Supply Chain sous dbt (lineage, tests d'intégrité).",
+      "liens":"https://github.com/AzzouzMezlini/dbt-supply-chain-bi",
       "skills": [
         "Git",
         "dbt",
@@ -336,6 +338,7 @@
       "badge": "GitHub",
       "type_badge": "github",
       "desc": "Couche sémantique et API analytique via Cube.dev.",
+      "liens":"https://github.com/AzzouzMezlini/cube-supply-chain-bi",
       "skills": ["Analyse de Données", "Schéma en Étoile"]
     },
     {
@@ -343,6 +346,7 @@
       "badge": "Kaggle",
       "type_badge": "kaggle",
       "desc": "Cartographie et analyse de données géospatiales sous Python.",
+      "liens":"https://www.kaggle.com/code/azzouzmezlini/trying-geospacial-dataset",
       "skills": [
         "Analyse de Données",
         "Mapping & Transformation de Données",
@@ -357,6 +361,7 @@
       "badge": "Kaggle",
       "type_badge": "kaggle",
       "desc": "Parsing et structuration de tables web vers pandas.",
+      "liens":"https://www.kaggle.com/code/azzouzmezlini/from-html-table-to-dataframe",
       "skills": [
         "Analyse de Données",
         "Mapping & Transformation de Données",
@@ -371,6 +376,7 @@
       "badge": "Kaggle",
       "type_badge": "kaggle",
       "desc": "Traitement et désimbrication de structures complexes.",
+      "liens":"https://www.kaggle.com/code/azzouzmezlini/cleaning-data-with-set-nested-into-a-dataframe",
       "skills": [
         "Analyse de Données",
         "Mapping & Transformation de Données",

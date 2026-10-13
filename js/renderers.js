@@ -16,22 +16,39 @@ export function renderHeader() {
     if (contactList) {
         const cvCompletUrl = `https://${state.cvData.coordonnees.cvcomplet}`;
         const linkedinUrl = `https://${state.cvData.coordonnees.linkedin}`;
-        const githubUrl = `https://${state.cvData.coordonnees.github}`;
+      const githubUrl = `https://${state.cvData.coordonnees.github}`;
+      const kaggleUrl = `https://${state.cvData.coordonnees.kaggle}`;
 
-        // URLs des API pour générer les QR codes à la volée
         const qrCvUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(cvCompletUrl)}`;
         const qrLinkedinUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(linkedinUrl)}`;
-        const qrGithubUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(githubUrl)}`;
+      const qrGithubUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(githubUrl)}`;
+      const qrKaggleUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(kaggleUrl)}`;
+
 
         contactList.innerHTML = `
-            <span class="contact-item">${state.cvData.coordonnees.adresse}</span>
-            <span class="contact-item">${state.cvData.coordonnees.email}</span>
-            <span class="contact-item">${state.cvData.coordonnees.permis}</span>
-            <a class="contact-item hide-on-print" href="${linkedinUrl}" target="_blank">LinkedIn</a>
-            <a class="contact-item hide-on-print" href="${githubUrl}" target="_blank">GitHub</a>
-            <a class="contact-item hide-on-print" href="${cvCompletUrl}" target="_blank">CV Complet</a>
+            <!-- Ligne du haut : E-mail & Liens interactifs -->
+            <div class="contact-row contact-row-top">
+                <span class="contact-item contact-email">📧 ${state.cvData.coordonnees.email}</span>
+                <a class="contact-item contact-link hide-on-print" href="${linkedinUrl}" target="_blank">LinkedIn ↗</a>
+                <a class="contact-item contact-link hide-on-print" href="${githubUrl}" target="_blank">GitHub ↗</a>
+                <a class="contact-item contact-link hide-on-print" href="${kaggleUrl}" target="_blank">Kaggle ↗</a>
+            </div>
 
-            <!-- Conteneurs des QR Codes pour l'impression -->
+            <!-- Ligne du bas : Données administratives (Adresse & Permis) -->
+            <div class="contact-row contact-row-bottom">
+                <span class="contact-item">${state.cvData.coordonnees.adresse}</span>
+                <span class="contact-item">${state.cvData.coordonnees.permis}</span>
+            </div>
+
+            <!-- Liens textuels affichés uniquement pour le PDF -->
+            <div class="print-text-links-wrapper">
+                <a class="contact-item print-text-link" href="${linkedinUrl}" target="_blank">LinkedIn</a>
+                <a class="contact-item print-text-link" href="${githubUrl}" target="_blank">GitHub</a>
+                <a class="contact-item print-text-link" href="${kaggleUrl}" target="_blank">Kaggle</a>
+                <a class="contact-item print-text-link" href="${cvCompletUrl}" target="_blank">CV Complet</a>
+            </div>
+
+            <!-- QR Codes pour l'impression papier -->
             <div class="print-qrcodes-wrapper">
                 <div class="print-qrcode-container">
                     <img src="${qrLinkedinUrl}" alt="QR Code LinkedIn" class="print-qrcode-img">
@@ -40,6 +57,10 @@ export function renderHeader() {
                 <div class="print-qrcode-container">
                     <img src="${qrGithubUrl}" alt="QR Code GitHub" class="print-qrcode-img">
                     <span class="print-qrcode-text">GitHub</span>
+                </div>
+                <div class="print-qrcode-container">
+                    <img src="${qrKaggleUrl}" alt="QR Code Kaggle" class="print-qrcode-img">
+                    <span class="print-qrcode-text">Kaggle</span>
                 </div>
                 <div class="print-qrcode-container">
                     <img src="${qrCvUrl}" alt="QR Code CV Complet" class="print-qrcode-img">
@@ -165,9 +186,14 @@ export function renderProjects() {
         card.className = 'project-card';
         card.dataset.projIdx = idx;
 
+        // Si un lien est présent dans le JSON, on l'encapsule dans une balise <a>
+        const projectTitleContent = proj.liens
+            ? `<a href="${proj.liens}" target="_blank" class="project-link">${proj.titre}</a>`
+            : proj.titre;
+
         card.innerHTML = `
             <div class="project-title">
-                <span>${proj.titre}</span>
+                <span>${projectTitleContent}</span>
                 <span class="project-badge ${proj.type_badge}">${proj.badge}</span>
             </div>
             <div class="project-desc">${proj.desc}</div>
