@@ -1,6 +1,7 @@
 # 📊 Architecture de CV Dynamique Pilotée par la Donnée
 
 [![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-2f81f7?style=for-the-badge)](https://azzouzmezlini.github.io/mon-cv/)
+[![Prendre RDV](https://img.shields.io/badge/📅%20Prendre%20RDV-cal.com-22c55e?style=for-the-badge)](https://cal.com/azzouz-mezlini-tyviqf)
 
 Ce dépôt héberge mon CV interactif de **Data Engineer / Développeur SQL & Data**. Conçu selon les principes de l'architecture logicielle moderne, ce projet sépare strictement les données métiers, la structure, la logique d'IHM et les feuilles de style modulaires.
 
@@ -70,6 +71,7 @@ Grâce au découplage complet entre les données et le code, aucune modification
 
 ## 🔗 Liens et Contact
 
+- **📅 Planifier un échange :** [Prendre un rendez-vous (Cal.com)](https://cal.com/azzouz-mezlini-tyviqf)
 - **Démo en ligne :** [Consulter mon CV sur GitHub Pages](https://azzouzmezlini.github.io/mon-cv/)
 - **LinkedIn :** [Profil LinkedIn](https://www.linkedin.com/in/azzouz-mezlini)
 - **GitHub :** [Profil GitHub](https://github.com/AzzouzMezlini)
