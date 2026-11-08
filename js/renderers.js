@@ -8,28 +8,27 @@ import {
 } from "./interactivity.js";
 
 export function renderHeader() {
-  if (!state.cvData) return;
-  document.getElementById("user-name").textContent =
-    state.cvData.coordonnees.nom;
-  document.getElementById("user-title").textContent = state.cvData.statut;
+    if (!state.cvData) return;
+    document.getElementById('user-name').textContent = state.cvData.coordonnees.nom;
+    document.getElementById('user-title').textContent = state.cvData.statut;
 
-  const contactList = document.getElementById("contact-list");
-  if (contactList) {
-    const cvCompletUrl = `https://${state.cvData.coordonnees.cvcomplet}`;
-    const linkedinUrl = `https://${state.cvData.coordonnees.linkedin}`;
-    const githubUrl = `https://${state.cvData.coordonnees.github}`;
-    const kaggleUrl = `https://${state.cvData.coordonnees.kaggle}`;
+    const contactList = document.getElementById('contact-list');
+    if (contactList) {
+        const cvCompletUrl = `https://${state.cvData.coordonnees.cvcomplet}`;
+        const linkedinUrl = `https://${state.cvData.coordonnees.linkedin}`;
+        const githubUrl = `https://${state.cvData.coordonnees.github}`;
+        const calUrl = "https://cal.com/azzouz-mezlini-tyviqf";
 
-    // QR Code unique pointant vers la version web interactive
-    const qrCvUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(cvCompletUrl)}`;
+        // QR Code unique pointant vers la version web interactive
+        const qrCvUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(cvCompletUrl)}`;
 
-    contactList.innerHTML = `
-            <!-- Ligne 1 : E-mail & Liens professionnels -->
+        contactList.innerHTML = `
+            <!-- Ligne 1 : E-mail & Liens professionnels + Call to Action -->
             <div class="contact-row contact-row-top">
                 <span class="contact-item contact-email">📧 ${state.cvData.coordonnees.email}</span>
                 <a class="contact-item contact-link hide-on-print" href="${linkedinUrl}" target="_blank">LinkedIn ↗</a>
                 <a class="contact-item contact-link hide-on-print" href="${githubUrl}" target="_blank">GitHub ↗</a>
-                <a class="contact-item contact-link hide-on-print" href="${kaggleUrl}" target="_blank">kaggle ↗</a>
+                <a class="contact-item contact-cta hide-on-print" href="${calUrl}" target="_blank">📅 Prendre RDV ↗</a>
             </div>
 
             <!-- Ligne 2 : Données administratives -->
@@ -38,12 +37,12 @@ export function renderHeader() {
                 <span class="contact-item">${state.cvData.coordonnees.permis}</span>
             </div>
 
-            <!-- Liens cliquables affichés sur l'export PDF -->
+            <!-- Liens cliquables affichés uniquement sur l'export PDF -->
             <div class="print-text-links-wrapper">
-                <a class="contact-item print-text-link" href="${cvCompletUrl}" target="_blank">Version Web Interactive ↗</a>
                 <a class="contact-item print-text-link" href="${linkedinUrl}" target="_blank">LinkedIn</a>
                 <a class="contact-item print-text-link" href="${githubUrl}" target="_blank">GitHub</a>
-                <a class="contact-item print-text-link" href="${kaggleUrl}" target="_blank">Kaggle</a>
+                <a class="contact-item print-text-link" href="${calUrl}" target="_blank">Prendre RDV</a>
+                <a class="contact-item print-text-link" href="${cvCompletUrl}" target="_blank">Version Web Interactive ↗</a>
             </div>
 
             <!-- QR Code UNIQUE pour le scan (Papier / Impression) -->
@@ -53,7 +52,7 @@ export function renderHeader() {
                 <span class="print-qrcode-text">Scanner pour la version en ligne</span>
             </div>
         `;
-  }
+    }
 }
 
 export function renderProfile() {
