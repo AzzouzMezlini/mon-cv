@@ -23,12 +23,15 @@ export function renderHeader() {
         const qrCvUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(cvCompletUrl)}`;
 
         contactList.innerHTML = `
-            <!-- Ligne 1 : E-mail & Liens professionnels + Call to Action -->
+            <!-- Ligne 1 : E-mail & Liens professionnels + Call to Action mis en valeur -->
             <div class="contact-row contact-row-top">
                 <span class="contact-item contact-email">📧 ${state.cvData.coordonnees.email}</span>
                 <a class="contact-item contact-link hide-on-print" href="${linkedinUrl}" target="_blank">LinkedIn ↗</a>
                 <a class="contact-item contact-link hide-on-print" href="${githubUrl}" target="_blank">GitHub ↗</a>
-                <a class="contact-item contact-cta hide-on-print" href="${calUrl}" target="_blank">📅 Prendre RDV ↗</a>
+                <a class="contact-item contact-cta-btn hide-on-print" href="${calUrl}" target="_blank">
+                    <span class="cta-icon">📅</span>
+                    <span>Prendre RDV (15/30 min)</span> ↗
+                </a>
             </div>
 
             <!-- Ligne 2 : Données administratives -->
@@ -41,7 +44,7 @@ export function renderHeader() {
             <div class="print-text-links-wrapper">
                 <a class="contact-item print-text-link" href="${linkedinUrl}" target="_blank">LinkedIn</a>
                 <a class="contact-item print-text-link" href="${githubUrl}" target="_blank">GitHub</a>
-                <a class="contact-item print-text-link" href="${calUrl}" target="_blank">Prendre RDV</a>
+                <a class="contact-item print-text-link" href="${calUrl}" target="_blank">Prendre RDV (Cal.com)</a>
                 <a class="contact-item print-text-link" href="${cvCompletUrl}" target="_blank">Version Web Interactive ↗</a>
             </div>
 

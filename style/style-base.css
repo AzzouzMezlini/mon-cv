@@ -368,6 +368,33 @@ body.theme-transition *::after {
     transform: translateY(-1px);
 }
 
+/* Style du bouton d'action principal Call to Action (Prendre RDV) */
+.contact-cta-btn {
+display: inline-flex !important;
+align-items: center;
+gap: 0.35rem;
+background-color: var(--accent-color);
+color: #ffffff !important;
+font-weight: 700;
+font-size: 8pt;
+padding: 3px 10px;
+border-radius: 12px;
+text-decoration: none;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+transition: all 0.2s ease;
+}
+
+.contact-cta-btn:hover {
+background-color: var(--accent-hover);
+transform: translateY(-1px);
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+text-decoration: none !important;
+}
+
+.contact-cta-btn .cta-icon {
+font-size: 9pt;
+}
+
 /* ==========================================================================
    6. LAYOUT PRINCIPAL & TITRES
    ========================================================================== */
